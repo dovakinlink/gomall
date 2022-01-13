@@ -1,0 +1,16 @@
+appName = "gomall"
+
+[mysql]
+host = "127.0.0.1"
+name = "gomall"
+password = "root453121"
+port = 3306
+tablePrefix = ""
+user = "root"
+
+[log]
+level = "debug"
+path = "logs/gomall.log"
+
+[staticPath]
+filePath = ""
