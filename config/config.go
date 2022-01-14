@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"github.com/spf13/viper"
+	"time"
 )
 
 // GoMall 万家医保配置信息
@@ -10,6 +11,7 @@ type GoMall struct {
 	MySQL      MySQLConfig
 	Log        LogConfig
 	StaticPath PathConfig
+	Token      TokenConfig
 	Wechat     WechatConfig
 }
 
@@ -32,6 +34,12 @@ type LogConfig struct {
 // PathConfig 静态文件地址配置信息
 type PathConfig struct {
 	FilePath string
+}
+
+// TokenConfig jwt token配置
+type TokenConfig struct {
+	Key        string
+	ExpireTime time.Duration
 }
 
 // WechatConfig 微信小程序配置信息

@@ -12,5 +12,9 @@ user = "root"
 level = "debug"
 path = "logs/gomall.log"
 
+[token]
+key = "gomall"
+expireTime = 300
+
 [staticPath]
 filePath = ""

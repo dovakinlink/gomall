@@ -3,6 +3,7 @@ module gomall
 go 1.16
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/gin-gonic/gin v1.7.4
 	github.com/gohouse/converter v0.0.3 // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.3 // indirect

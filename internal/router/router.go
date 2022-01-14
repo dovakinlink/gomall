@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	v1 "gomall/api/v1"
+	"gomall/internal/middleware"
 	"gomall/pkg/common/response"
 	"gomall/pkg/global/log"
 	"net/http"
@@ -18,8 +19,9 @@ func NewRouter() *gin.Engine {
 
 	group := server.Group("")
 	{
-		group.POST("/user/register", v1.Register) // 注册
-		group.GET("/user/login", v1.Login)        // 登陆
+		group.POST("/user/register", v1.Register)                       // 注册
+		group.POST("/user/login", v1.Login)                             // 登陆
+		group.GET("/user/token", middleware.TokenCheck(), v1.TestToken) // token验证测试
 	}
 	return server
 }

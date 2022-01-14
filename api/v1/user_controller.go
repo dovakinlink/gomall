@@ -5,9 +5,11 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"gomall/internal/dao/pool"
 	"gomall/internal/model"
+	"gomall/internal/service"
 	"gomall/pkg/common/request"
 	"gomall/pkg/common/response"
 	"gomall/pkg/global/log"
+	"gomall/pkg/global/token"
 	"net/http"
 	"time"
 )
@@ -56,5 +58,28 @@ func Register(c *gin.Context) {
 
 // Login 登陆
 func Login(c *gin.Context) {
-	c.JSON(http.StatusOK, response.SuccessMsg(nil))
+	var loginRequest request.LoginRequest
+	c.ShouldBindJSON(&loginRequest)
+	var member model.Member
+	isExist, member, err := service.UserService.CheckPassword(loginRequest.Username, loginRequest.Password)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, response.FailMsg("service internal error"))
+		return
+	}
+	if !isExist {
+		c.JSON(http.StatusOK, response.FailMsg("用户名或密码错误"))
+		return
+	}
+	t, err := token.GenerateToken(int64(member.Id), member.Username)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, response.FailMsg("service internal error"))
+		return
+	}
+
+	c.JSON(http.StatusOK, response.SuccessMsg(t))
+	return
+}
+
+func TestToken(c *gin.Context) {
+	c.JSON(http.StatusOK, response.SuccessMsg("TOKEN正确"))
 }
