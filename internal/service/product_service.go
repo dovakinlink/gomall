@@ -29,12 +29,14 @@ func (*productService) ListCategoryById(id int) (*[]response.CategoryResponse, e
 	return &resSlice, nil
 }
 
-func (*productService) ListProductByCategoryId(id int) (*[]model.Product, error) {
+func (*productService) ListProductByCategoryId(id int, pageSize int, pageNum int) (*[]model.Product, int, error) {
 	db := pool.GetDB()
 	var resSlice []model.Product
-	rows, err := db.Raw("select * from product where product_category_id = ?", id).Rows()
+	//db.Raw("select * from product where product_category_id = ?", id).Count(&total)
+	//rows, err := db.Raw("select * from product where product_category_id = ? limit ?, ?", id, (pageNum-1)*pageSize, pageSize).Rows()
+	rows, totalPage, err := pool.Service.RawForPage("select * from product where product_category_id = ?", pageSize, pageNum, id)
 	if err != nil {
-		return &resSlice, err
+		return &resSlice, totalPage, err
 	}
 	defer rows.Close()
 	for rows.Next() {
@@ -42,5 +44,5 @@ func (*productService) ListProductByCategoryId(id int) (*[]model.Product, error)
 		db.ScanRows(rows, &res)
 		resSlice = append(resSlice, res)
 	}
-	return &resSlice, nil
+	return &resSlice, totalPage, nil
 }

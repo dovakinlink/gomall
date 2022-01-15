@@ -19,10 +19,11 @@ func NewRouter() *gin.Engine {
 
 	group := server.Group("")
 	{
-		group.POST("/user/register", v1.Register)                                             // 注册
-		group.POST("/user/login", v1.Login)                                                   // 登陆
-		group.GET("/user/token", middleware.TokenCheck(), v1.TestToken)                       // token验证测试
-		group.GET("/product/category/list/:id", middleware.TokenCheck(), v1.ListCategoryById) // 根据商品分类ID获取子分类列表
+		group.POST("/user/register", v1.Register)                                                 // 注册
+		group.POST("/user/login", v1.Login)                                                       // 登陆
+		group.GET("/user/token", middleware.TokenCheck(), v1.TestToken)                           // token验证测试
+		group.GET("/product/category/list/:id", middleware.TokenCheck(), v1.ListCategoryById)     // 根据商品分类ID获取子分类列表
+		group.GET("/product/list/by/cateId", middleware.TokenCheck(), v1.ListProductByCategoryId) // 根据商品分类ID分页获取商品列表
 	}
 	return server
 }

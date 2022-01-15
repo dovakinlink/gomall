@@ -14,22 +14,26 @@ func TokenCheck() gin.HandlerFunc {
 		t := c.GetHeader("Authorization")
 		if t == "" {
 			c.JSON(http.StatusNetworkAuthenticationRequired, response.FailMsg("请登录"))
+			c.Abort()
 			return
 		}
 		memberToken, err := token.ParseToken(t)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, response.FailMsg("token解析失败"))
+			c.Abort()
 			return
 		}
 		isExist, err := service.UserService.CheckMember(memberToken.ID, memberToken.Username)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, response.FailMsg("service internal error"))
+			c.Abort()
 			return
 		}
 		if isExist {
 			c.Next()
 		} else {
 			c.JSON(http.StatusForbidden, response.FailMsg("鉴权失败"))
+			c.Abort()
 			return
 		}
 

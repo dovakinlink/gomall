@@ -8,9 +8,9 @@ type ResponseMsg struct {
 
 type ResponsePageMsg struct {
 	ResponseMsg
-	PageSize uint `json:"pageSize"`
-	PageNum  uint `json:"pageNum"`
-	total    uint `json:"totalPage"`
+	PageSize  int `json:"pageSize"`
+	PageNum   int `json:"pageNum"`
+	TotalPage int `json:"totalPage"`
 }
 
 func SuccessMsg(data interface{}) *ResponseMsg {
@@ -22,16 +22,16 @@ func SuccessMsg(data interface{}) *ResponseMsg {
 	return msg
 }
 
-func SuccessMsgForPages(data interface{}, pageSize uint, pageNum uint, total uint) *ResponsePageMsg {
+func SuccessMsgForPages(data interface{}, pageSize int, pageNum int, total int) *ResponsePageMsg {
 	msg := &ResponsePageMsg{
 		ResponseMsg: ResponseMsg{
 			Code: 0,
 			Msg:  "SUCCESS",
 			Data: data,
 		},
-		PageSize: pageSize,
-		PageNum:  pageNum,
-		total:    total,
+		PageSize:  pageSize,
+		PageNum:   pageNum,
+		TotalPage: total,
 	}
 	return msg
 }

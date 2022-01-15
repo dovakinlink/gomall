@@ -14,7 +14,7 @@ path = "logs/gomall.log"
 
 [token]
 key = "gomall"
-expireTime = 300
+expireTime = 3000
 
 [staticPath]
 filePath = ""

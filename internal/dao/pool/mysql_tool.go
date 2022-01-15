@@ -1,6 +1,7 @@
 package pool
 
 import (
+	"database/sql"
 	"fmt"
 	"gomall/config"
 	"gorm.io/driver/mysql"
@@ -10,6 +11,11 @@ import (
 
 var _db *gorm.DB
 var dsn string
+
+type service struct {
+}
+
+var Service = new(service)
 
 func init() {
 	username := config.GetConfig().MySQL.User     // 账号
@@ -42,4 +48,14 @@ func GetDsn() string {
 
 func GetDB() *gorm.DB {
 	return _db
+}
+
+func (*service) RawForPage(sql string, pageSize int, pageNum int, values ...interface{}) (*sql.Rows, int, error) {
+	var totalPage int64
+	_db.Raw(sql, values).Count(&totalPage)
+	rows, err := _db.Raw(sql+" limit ?,?", values, (pageNum-1)*pageSize, pageSize).Rows()
+	if err != nil {
+		return rows, int(totalPage), err
+	}
+	return rows, int(totalPage), nil
 }
