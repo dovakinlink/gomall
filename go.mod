@@ -4,8 +4,10 @@ go 1.16
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
+	github.com/garyburd/redigo v1.6.3 // indirect
 	github.com/gin-gonic/gin v1.7.4
 	github.com/gohouse/converter v0.0.3 // indirect
+	github.com/gomodule/redigo v1.8.8 // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.3 // indirect
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/silenceper/wechat/v2 v2.1.0 // indirect

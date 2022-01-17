@@ -9,6 +9,7 @@ import (
 // GoMall 万家医保配置信息
 type GoMall struct {
 	MySQL      MySQLConfig
+	Redis      RedisConfig
 	Log        LogConfig
 	StaticPath PathConfig
 	Token      TokenConfig
@@ -23,6 +24,12 @@ type MySQLConfig struct {
 	Port        int
 	TablePrefix string
 	User        string
+}
+
+// RedisConfig redis配置信息
+type RedisConfig struct {
+	Network string
+	Address string
 }
 
 // LogConfig 日志配置信息

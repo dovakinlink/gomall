@@ -8,6 +8,10 @@ port = 3306
 tablePrefix = ""
 user = "root"
 
+[redis]
+network = "tcp"
+address = "localhost:6379"
+
 [log]
 level = "debug"
 path = "logs/gomall.log"
