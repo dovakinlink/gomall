@@ -1,19 +1,13 @@
 package model
 
-type ProductCategory struct {
-	Id          int    `gorm:"id" json:"id"`
-	ParentId    int    `gorm:"parent_id" json:"parent_id"`     // 上级分类ID，0表示一级分类
-	Name        string `gorm:"name" json:"name"`               // 分类名称
-	Level       int    `gorm:"level" json:"level"`             // 分类级别： 0->1级 1->2级
-	ShowStatus  int    `gorm:"show_status" json:"show_status"` // 是否展示 0:不展示，1:展示
-	Sort        int    `gorm:"sort" json:"sort"`               // 展示排序
-	Keywords    string `gorm:"keywords" json:"keywords"`       // 关键字
-	Description string `gorm:"description" json:"description"` // 分类描述
-	LeafNode    int    `gorm:"leaf_node" json:"leaf_node"`     // 是否为叶子节点分类，0:是，1:否
+type Admin struct {
+	Id       int    `gorm:"id" json:"id"`
+	Username string `gorm:"username" json:"username"`
+	Password string `gorm:"password" json:"password"`
 }
 
-func (*ProductCategory) TableName() string {
-	return "product_category"
+func (*Admin) TableName() string {
+	return "admin"
 }
 
 type Brand struct {
@@ -65,4 +59,20 @@ type Product struct {
 
 func (*Product) TableName() string {
 	return "product"
+}
+
+type Product_category struct {
+	Id          int    `gorm:"id" json:"id"`
+	ParentId    int    `gorm:"parent_id" json:"parent_id"`     // 上级分类ID，0表示一级分类
+	Name        string `gorm:"name" json:"name"`               // 分类名称
+	Level       int    `gorm:"level" json:"level"`             // 分类级别： 0->1级 1->2级
+	ShowStatus  int    `gorm:"show_status" json:"show_status"` // 是否展示 0:不展示，1:展示
+	Sort        int    `gorm:"sort" json:"sort"`               // 展示排序
+	Keywords    string `gorm:"keywords" json:"keywords"`       // 关键字
+	Description string `gorm:"description" json:"description"` // 分类描述
+	LeafNode    int    `gorm:"leaf_node" json:"leaf_node"`     // 是否为叶子节点分类，0:是，1:否
+}
+
+func (*Product_category) TableName() string {
+	return "product_category"
 }

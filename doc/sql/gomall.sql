@@ -68,3 +68,14 @@ create table brand
 )
     comment '品牌';
 
+create table admin
+(
+    id       bigint auto_increment,
+    username varchar(64)  null,
+    password varchar(255) null,
+    constraint admin_pk
+        primary key (id)
+)
+    comment '管理员用户表';
+
+
