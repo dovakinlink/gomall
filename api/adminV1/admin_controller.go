@@ -28,4 +28,5 @@ func Login(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, response.SuccessMsg(token))
+	return
 }

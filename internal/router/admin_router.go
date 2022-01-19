@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	v1 "gomall/api/v1"
+	"gomall/api/adminV1"
 )
 
 func NewAdminRouter() *gin.Engine {
@@ -14,7 +14,7 @@ func NewAdminRouter() *gin.Engine {
 
 	group := server.Group("")
 	{
-		group.POST("/user/register", v1.Register) // 注册
+		group.POST("/admin/login", adminV1.Login) // 管理员登陆
 	}
 	return server
 }
